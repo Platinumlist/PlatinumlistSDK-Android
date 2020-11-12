@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: "${rootDir}/config/appConfig.gradle"
+
+def depends = [
+        defaultPresentationBase,
+        defaultDi,
+
+        [configuration: "implementation", dependency: firebase.analytics],
+        [configuration: "implementation", dependency: firebase.crashlytics],
+
+        [configuration: "implementation", dependency: base.lifecycleRuntime],
+
+        [configuration: "implementation", dependency: base.coroutinesCore],
+        [configuration: "implementation", dependency: base.coroutinesAndroid],
+
+        [configuration: "implementation", dependency: retrofit.retrofit],
+        [configuration: "implementation", dependency: retrofit.converter],
+        [configuration: "implementation", dependency: retrofit.coroutines],
+        [configuration: "implementation", dependency: retrofit.okhttp],
+
+        [configuration: "implementation", dependency: vrg_android.retrofit],
+].flatten()
+
+android {
+    defaultConfig {
+        applicationId "com.platinumlist.sdk"
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+        dev {
+            versionNameSuffix "-dev"
+            buildConfigField "String", "BASE_URL", "\"https://api.platinumlist.net/v/6/\""
+        }
+
+        prod {
+            versionNameSuffix "-prod"
+            buildConfigField "String", "BASE_URL", "\"https://api.platinumlist.net/v/6/\""
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        pickFirst("META-INF/LICENSE.md")
+        pickFirst("META-INF/NOTICE.md")
+    }
+}
+
+dependencies {
+    depends.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+
+    implementation project(':sdk')
+}

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/basketLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Your basket:"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemCountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Item count:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/basketLabel"
+        app:layout_constraintTop_toBottomOf="@+id/basketLabel" />
+
+    <TextView
+        android:id="@+id/itemCountValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemCountLabel"
+        app:layout_constraintStart_toEndOf="@+id/itemCountLabel"
+        app:layout_constraintTop_toTopOf="@+id/itemCountLabel"
+        tools:text="4" />
+
+    <TextView
+        android:id="@+id/priceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Flat price:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/itemCountLabel"
+        app:layout_constraintTop_toBottomOf="@+id/itemCountLabel" />
+
+    <TextView
+        android:id="@+id/priceValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/priceLabel"
+        app:layout_constraintStart_toEndOf="@+id/priceLabel"
+        app:layout_constraintTop_toTopOf="@+id/priceLabel"
+        tools:text="4" />
+
+    <TextView
+        android:id="@+id/servicesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Services:"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/priceLabel"
+        app:layout_constraintTop_toBottomOf="@+id/priceLabel" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/serviceList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/btnPurchase"
+        app:layout_constraintTop_toBottomOf="@+id/servicesLabel" />
+
+    <Button
+        android:id="@+id/btnPurchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Purchase"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
