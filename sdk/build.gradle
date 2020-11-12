@@ -6,6 +6,7 @@ apply plugin: 'kotlin-kapt'
 
 apply from: "${rootDir}/config/appConfig.gradle"
 
+apply plugin: 'maven'
 apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.Platinumlist'
 
