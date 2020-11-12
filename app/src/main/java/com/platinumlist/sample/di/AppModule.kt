@@ -28,7 +28,7 @@ object AppModule {
 
     private fun configureRetrofit() {
         RetrofitConfig.apply {
-            baseUrl = BuildConfig.BASE_URL
+            baseUrl = "https://api.platinumlist.net/v/6/"
 
             useCustomAuthInterceptor(RemoteInterceptor())
 

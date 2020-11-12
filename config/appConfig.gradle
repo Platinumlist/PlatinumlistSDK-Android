@@ -20,18 +20,6 @@ android {
         }
     }
 
-    flavorDimensions "version"
-
-    productFlavors {
-        dev {
-            dimension "version"
-        }
-
-        prod {
-            dimension "version"
-        }
-    }
-
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8

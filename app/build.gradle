@@ -37,18 +37,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    productFlavors {
-        dev {
-            versionNameSuffix "-dev"
-            buildConfigField "String", "BASE_URL", "\"https://api.platinumlist.net/v/6/\""
-        }
-
-        prod {
-            versionNameSuffix "-prod"
-            buildConfigField "String", "BASE_URL", "\"https://api.platinumlist.net/v/6/\""
-        }
-    }
-
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
         pickFirst("META-INF/LICENSE.md")
