@@ -29,7 +29,14 @@ dependencies {
    android:layout_height="match_parent" />
 ```
 
-3. implement the PlatinumView.Adapter
+3. implement the PlatinumView.Adapter.
+By override method orderStatusResolver(orderID : Int, status : String) you can get orderID and status of your order.
+
+```kotlin
+override fun orderStatusResolver(orderId: Int, status: String) {
+    show("orderStatusResolver(orderId: $orderId, status: $status)")
+}
+```
 
 4. set adapter to view:
 
