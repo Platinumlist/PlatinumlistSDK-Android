@@ -38,6 +38,10 @@ override fun orderStatusResolver(orderId: Int, status: String) {
 }
 ```
 
+- **orderId** - int, 
+ - **status** - string, `completed|expired|pending payment` - current order status
+
+
 By override method provideUser() you can specify user data.
 
 ```kotlin
@@ -51,6 +55,14 @@ override suspend fun provideUser(): UserRequest {
     )
 }
 ```
+- **name** - string, 5 - 200 chars
+- **email** - string, 5 - 200 chars
+- **phone** - string, expect valid phone number
+- **nationalityId** - int, [Method returns available nationality ids](https://docs.platinumlist.net/api/v7/#country-country-list-get)
+- **cityId** - int, [Method returns available city ids](https://docs.platinumlist.net/api/v7/#city-city-list)
+
+ `When the first ticket was added the basket has expiration time equal 15 minutes.`
+
 
 This method executes in invalidate() method.
 
@@ -71,3 +83,10 @@ adapter.invalidate()
 ```kotlin
 platinumView.clear()
 ```
+
+### Payment
+For the testing purchase use `Payfort Test` payment gateway. 
+[Available credit card credentials](https://paymentservices.amazon.com/docs/EN/12.html#test-payment-card-numbers)
+
+### Order details
+[Method returns info about order](https://docs.platinumlist.net/api/v7/#order-order)
