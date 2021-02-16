@@ -38,6 +38,22 @@ override fun orderStatusResolver(orderId: Int, status: String) {
 }
 ```
 
+By override method provideUser() you can specify user data.
+
+```kotlin
+override suspend fun provideUser(): UserRequest {
+    return UserRequest(
+        name = "User Userovich",
+        cityId = 1,
+        email = "email@gmail.com",
+        nationalityId = 254,
+        phone = "+971501234567"
+    )
+}
+```
+
+This method executes in invalidate() method.
+
 4. set adapter to view:
 
 ```kotlin
