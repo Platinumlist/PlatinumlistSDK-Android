@@ -84,6 +84,44 @@ adapter.invalidate()
 platinumView.clear()
 ```
 
+7. By override method getSdkType() you can return sdk type.
+
+```kotlin
+override fun getSdkType(): SdkType {
+	return Storage.sdkType
+}
+
+enum class SdkType(val typeName: String) {
+	PURCHASE(“purchase”),
+	TICKET_OFFICE(“ticket-office”),
+	SELECT_TICKETS(“select-tickets”)
+}
+```
+
+8. By override method provideEventShowSetting() you can return event_show_setting type.
+
+```kotlin
+override suspend fun provideEventShowSetting(): Int {
+	return Storage.isEventShowSetting
+}
+```
+
+9. By override method provideLanguage() you can return language for WebView (“en” | “ar”).
+
+```kotlin
+override suspend fun provideLanguage(): String {
+	return Storage.lang
+}
+```
+
+10. By override method triggerError(message: String, code: Int) you can get message and code of error.
+
+```kotlin
+override fun triggerError(message: String, code: Int) {
+	show(“triggerError(message: $message, code: $code)”)
+}
+```
+
 ### Payment
 For the testing purchase use `Payfort Test` payment gateway. 
 [Available credit card credentials](https://paymentservices.amazon.com/docs/EN/12.html#test-payment-card-numbers)
