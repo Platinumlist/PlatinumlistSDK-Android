@@ -1,11 +1,15 @@
 package com.platinumlist.sample.ui
 
+import android.Manifest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.platinumlist.sample.ui.login.LoginFragment
 import com.platinumlist.sample.ui.result.ResultFragment
 import com.platinumlist.sample.ui.sdk.SdkFragment
+import com.platinumlist.sample.ui.settings.SettingsListFragment
 import com.platinumlist.sample.ui.showlist.ShowListFragment
+import com.platinumlist.sample.ui.updorder.UpdateOrderFragment
 import com.platinumlist.sdk.R
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -26,6 +30,9 @@ class MainActivity : AppCompatActivity(), Router, KodeinAware {
 
         setContentView(R.layout.activity_main)
 
+        ActivityCompat.requestPermissions(this,
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, LoginFragment())
             .commit()
@@ -37,9 +44,15 @@ class MainActivity : AppCompatActivity(), Router, KodeinAware {
             .commit()
     }
 
-    override fun navigateToSdk(id: Long) {
+    override fun navigateToSettingsList() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, SdkFragment.create(id))
+            .replace(R.id.fragmentContainer, SettingsListFragment())
+            .commit()
+    }
+
+    override fun navigateToSdk(eventId: Long, eventShowId: Long) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, SdkFragment.create(eventId, eventShowId))
             .addToBackStack("SdkFragment")
             .commit()
     }
@@ -47,6 +60,12 @@ class MainActivity : AppCompatActivity(), Router, KodeinAware {
     override fun navigateToResult(result: Boolean) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, ResultFragment.create(result))
+            .commit()
+    }
+
+    override fun navigateToUpdateOrder() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, UpdateOrderFragment())
             .commit()
     }
 }
