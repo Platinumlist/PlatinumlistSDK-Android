@@ -14,6 +14,7 @@ import com.platinumlist.sample.remote.data.common.Storage
 import com.platinumlist.sample.ui.Router
 import com.platinumlist.sdk.R
 import com.platinumlist.sdk.common.InvalidDataException
+import com.platinumlist.sdk.common.SdkType
 import kotlinx.android.synthetic.main.activity_sample.platinumView
 import kotlinx.android.synthetic.main.fragment_sdk.*
 import kotlinx.coroutines.Dispatchers
@@ -77,7 +78,12 @@ class SdkFragment : Fragment(), KodeinAware {
 
         GlobalScope.launch {
             try {
-                Storage.showId = arguments!!.getLong(KEY_ID, -1L)
+                //adapter.processUser("jwt", SMSocialType.DTCM)
+                //adapter.setLang(Language.ENGLISH.shortName)
+
+
+                Storage.showId = arguments!!.getLong(EVENT_ID, -1L)
+                Storage.eventShowId = arguments!!.getLong(EVENT_SHOW_ID, -1L)
                 adapter.invalidate()
             } catch (e: InvalidDataException) {
                 when (e.data) {
@@ -94,6 +100,14 @@ class SdkFragment : Fragment(), KodeinAware {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        if (Storage.orderId != -1L) {
+            router.navigateToUpdateOrder()
+        }
+
+        super.onDestroy()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -114,12 +128,14 @@ class SdkFragment : Fragment(), KodeinAware {
     }
 
     companion object {
-        private const val KEY_ID = "id"
+        private const val EVENT_ID = "eventId"
+        private const val EVENT_SHOW_ID = "eventShowId"
 
-        fun create(id: Long): SdkFragment {
+        fun create(eventId: Long, eventShowId: Long): SdkFragment {
             return SdkFragment().apply {
                 arguments = Bundle().apply {
-                    putLong(KEY_ID, id)
+                    putLong(EVENT_ID, eventId)
+                    putLong(EVENT_SHOW_ID, eventShowId)
                 }
             }
         }

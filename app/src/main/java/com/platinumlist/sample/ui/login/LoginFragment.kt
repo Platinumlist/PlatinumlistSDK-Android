@@ -65,7 +65,8 @@ class LoginFragment : Fragment(), KodeinAware {
                             it.body()?.data?.accessToken?.let {
                                 Storage.token = it
 
-                                router.navigateToShowList()
+                                //router.navigateToShowList()
+                                router.navigateToSettingsList()
                             }
                         } else {
                             withContext(Dispatchers.Main) {

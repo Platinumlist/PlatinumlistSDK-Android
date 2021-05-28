@@ -104,6 +104,6 @@ class ShowListFragment : Fragment(), KodeinAware {
     }
 
     private fun onItemClicked(item: ShowUI) {
-        router.navigateToSdk(item.id)
+        router.navigateToSdk(item.id, -1L)
     }
 }

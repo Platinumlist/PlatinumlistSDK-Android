@@ -2,11 +2,10 @@ package com.platinumlist.sample.remote
 
 import com.platinumlist.sample.remote.data.common.DataWrapper
 import com.platinumlist.sample.remote.data.request.BasketRequest
+import com.platinumlist.sample.remote.data.request.OrderCompletedRequest
+import com.platinumlist.sample.remote.data.request.OrderFailedRequest
 import com.platinumlist.sample.remote.data.request.TokenRequest
-import com.platinumlist.sample.remote.data.response.BasketResponse
-import com.platinumlist.sample.remote.data.response.ServiceResponse
-import com.platinumlist.sample.remote.data.response.ShowResponse
-import com.platinumlist.sample.remote.data.response.TokenResponse
+import com.platinumlist.sample.remote.data.response.*
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -67,10 +66,35 @@ interface Api {
         request: BasketRequest
     ): Deferred<Response<Any>>
 
+    @PATCH(ORDER)
+    fun completedOrderAsync(
+        @Path("id")
+        id: Long,
+        @Body
+        request: OrderCompletedRequest
+    ): Deferred<Response<Any>>
+
+    @PATCH(ORDER)
+    fun failedOrderAsync(
+        @Path("id")
+        id: Long,
+        @Body
+        request: OrderFailedRequest
+    ): Deferred<Response<Any>>
+
+    @GET(ORDER)
+    fun getOrderAsync(
+        @Path("id")
+        id: Long,
+        @Query("scope")
+        scope: String
+    ): Deferred<Response<DataWrapper<OrderResponse>>>
+
     companion object {
         private const val TOKEN = "access-token"
         private const val SHOWS = "event-shows"
         private const val BASKET = "baskets/{id}"
         private const val SERVICES = "event-shows/{id}/services"
+        private const val ORDER = "orders/{id}"
     }
 }
