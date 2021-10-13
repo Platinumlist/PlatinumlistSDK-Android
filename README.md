@@ -147,7 +147,7 @@ override fun setOrderAmount(amount: Float) {
 	Storage.amount = amount
 }
 ```
-
+### Complete Order for selectTickets SDK type
 13. Сreate an instance of the OrderResultView class and inject context.
 Then you can call the methods of completed or failed order status.
 These methods return the result of the status update:
